@@ -160,3 +160,100 @@ docker push nameoftheimage:tag
  ![Alt text](image-12.png)
 
  ![Alt text](image-13.png)
+
+
+
+
+ # other commands
+  
+
+   - copy a file from local to container
+
+  `docker container cp abc.txt CONTAINERID:pathtopaste`
+
+![Alt text](image-14.png)
+
+
+![Alt text](image-15.png)
+
+
+ - copy a file from container to local
+
+ `docker cp container1:/app/example.txt .`
+
+ ![Alt text](image-16.png)
+
+
+# create a simple docker file => alpine with git installed
+
+ Dockerile - is a simple text file, with instructions to create a  image
+
+ Capital D'
+
+ - first instruction is FROM <baseimage>
+
+ like FROM alpine:1.21.1
+
+- RUN command to run a instruction
+
+![Alt text](image-18.png)
+
+
+to create a image from the dockerfile, need to BUILD
+
+`docker image build -t NAMEOFTHEIMAGE:TAG pathofthedockerfile`
+
+![Alt text](image-17.png)
+
+ - custom Dockerfile naming
+
+               docker image build -t thulasi-alpine:v2 -f newDockerfile .(path to the dockerfile)
+
+
+     - ENTRY POINT :` DEFAULT INSTRUCTION COMMAND`
+
+
+![Alt text](image-19.png)
+
+![Alt text](image-20.png)
+
+
+
+----------
+
+# CONTAINER STORAGE IS NON-PERSISTENT !!!
+
+### how to make container storage persistent
+
+    => Docker Volumes
+
+check if any docker volume
+
+![Alt text](image-21.png)
+
+Create docker volume
+
+docker volume create VOLUMENAME
+
+![Alt text](image-22.png)
+
+
+
+create a container mounting our volume
+
+
+
+
+    `docker container run -i -t --mount source=myvol1,target=/thulasi centos:7 bash`
+
+
+- enter the container
+- create a file under /thulasi
+- exit the container
+-delete the container
+
+But, the created file will be there in the volume mounted.
+
+where -? in the default directory of the docker `/var/lib/docker/volumes/myvol1/_data`
+
+![Alt text](image-23.png)
